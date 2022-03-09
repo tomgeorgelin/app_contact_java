@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Clients</title>
+    <title>Affichage des contacts</title>
 </head>
 <body>
     <ul th:each="c : ${contacts}">
-        <li th:text="${c}"/><br/>
+        <li th:text="${c}"/>
+        <form action="/remove" method="post">
+            <input type="number" name="id" th:value="${c.id}" hidden>
+            <button type="submit">Supprimer</button>
+        </form><br/>
+        <a th:href="@{/show(id=${c.id})}">
+            <button type="submit">Modifier</button>
+        </a>
     </ul>
 </body>
 </html>

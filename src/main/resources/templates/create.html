@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Création de contact</title>
+</head>
+<body>
+
+<div th:if="${contact}">
+    <form action="/create" method="post">
+        <input type="text" name="nom" id="nom" placeholder="nom" th:value="${contact.nom}" required>
+        <input type="text" name="prenom" id="prenom" placeholder="prenom" th:value="${contact.prenom}" required>
+        <input type="text" name="adresse" id="adresse" placeholder="adresse" th:value="${contact.adresse_postale}" required>
+        <button type="submit">Modifier le client</button>
+    </form>
+</div>
+<div th:unless="${contact}">
+    <form action="/create" method="post">
+        <input type="text" name="nom" id="nom" placeholder="nom" required>
+        <input type="text" name="prenom" id="prenom" placeholder="prenom" required>
+        <input type="text" name="adresse" id="adresse" placeholder="adresse" required>
+        <button type="submit">Enregistrer le client</button>
+    </form>
+</div>
+</body>
+</html>

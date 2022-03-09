@@ -25,7 +25,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s", prenom, nom, adresse_postale);
+        return String.format("%d %s %s %s %s", id, prenom, nom, adresse_postale, this.emails != null ? emails.toString() : "");
     }
 
     public Long getId() {
