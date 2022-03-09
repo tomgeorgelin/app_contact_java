@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+</head>
+<body>
+    <ul th:each="c : ${contacts}">
+        <li th:text="${c}"/><br/>
+    </ul>
+</body>
+</html>
