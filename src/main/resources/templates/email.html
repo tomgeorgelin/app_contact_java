@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajout & listing  email</title>
+</head>
+<body>
+    <h1>Ajouter une adresse email</h1>
+    <form action="/email" method="post">
+        <label for="email">Adresse email</label>
+        <input type="text" name="email" id="email">
+        <button type="submit">Ajouter</button>
+    </form>
+    <h2>Emails existants</h2>
+    <ul th:each="email : ${emails}">
+        <li th:text="${email}"/><br/>
+    </ul>
+</body>
+</html>
