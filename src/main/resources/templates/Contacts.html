@@ -3,17 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Affichage des contacts</title>
+    <style>
+        @font-face {
+            font-family: "Maven";
+            src: url("/fonts/MavenPro-Regular.ttf") format("truetype");
+        }
+
+        body {
+            font-family: "Maven", sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: #3498db;
+            display: flex;
+            justify-content: center;
+        }
+        body > div {
+            background: white;
+            width: 700px;
+            max-width: 80vw;
+            border-radius: 10px;
+            padding: 15px;
+            -webkit-box-shadow: 5px 5px 15px 5px #0000006b;
+            box-shadow: 5px 5px 15px 5px #0000006b;
+            position: relative;
+        }
+        ul > li {
+            display: grid;
+            grid-template-columns: 3em 1fr 1fr 1fr auto auto;
+            grid-gap: 10px;
+        }
+        .btn-ctn {
+            display: flex;
+            justify-content: space-around;
+        }
+        .btn-ctn a {
+            border: 1px solid black;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 20px;
+            color: black;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<div>
+    <h2>Liste des contacts : </h2>
+    <div class="btn-ctn">
+        <a href="show">Créer un contact</a>
+        <a href="email">Gérer les emails</a>
+    </div>
+
     <ul th:each="c : ${contacts}">
-        <li th:text="${c}"/>
-        <form action="/remove" method="post">
-            <input type="number" name="id" th:value="${c.id}" hidden>
-            <button type="submit">Supprimer</button>
-        </form><br/>
-        <a th:href="@{/show(id=${c.id})}">
-            <button type="submit">Modifier</button>
-        </a>
+        <li>
+            <span th:text="${c.id}"/>
+            <span th:text="${c.prenom}"/>
+            <span th:text="${c.nom}"/>
+            <span th:text="${c.adresse_postale}"/>
+            <form action="/remove" method="post">
+                <input type="number" name="id" th:value="${c.id}" hidden>
+                <button type="submit">Supprimer</button>
+            </form>
+            <a th:href="@{/show(id=${c.id})}">
+                <button type="submit">Modifier</button>
+            </a>
+        </li>
+        <ol>
+            <li th:each="ce : ${c.emails}" th:text="${ce.email}"></li>
+        </ol>
     </ul>
+</div>
 </body>
 </html>

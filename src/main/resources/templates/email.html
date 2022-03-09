@@ -3,11 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajout & listing des email</title>
+    <style>
+        @font-face {
+            font-family: "Maven";
+            src: url("/fonts/MavenPro-Regular.ttf") format("truetype");
+        }
+
+        body {
+            font-family: "Maven", sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: #3498db;
+            display: flex;
+            justify-content: center;
+        }
+
+        body > div {
+            width: 1000px;
+            max-width: 80vw;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            -webkit-box-shadow: 5px 5px 15px 5px #0000006b;
+            box-shadow: 5px 5px 15px 5px #0000006b;
+        }
+        #formEmail {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-gap: 10px;
+        }
+        li {
+            display: grid;
+            grid-template-columns: 3em 1fr 5em;
+        }
+
+    </style>
 </head>
 <body>
+<div>
     <h1>Ajouter une adresse email</h1>
-    <form action="/email" method="post">
-        <label for="email">Adresse email</label>
+    <form action="/email" method="post" id="formEmail">
+        <label for="email">Adresse email : </label>
         <input type="text" name="email" id="email" required>
 
         <select name="contact" id="contact" required>
@@ -17,13 +53,17 @@
         </select>
         <button type="submit">Ajouter</button>
     </form>
-    <h2>Emails existants</h2>
+    <h2>Emails existantes</h2>
     <ul th:each="email : ${emails}">
-        <li th:text="${email}"/>
-        <form action="/remove-email" method="post">
-            <input type="number" name="id" th:value="${email.id}" hidden>
-            <button type="submit">Supprimer</button>
-        </form><br/>
+        <li>
+            <span th:text="${email.id}"/><span th:text="${email.email}"/>
+            <form action="/remove-email" method="post">
+                <input type="number" name="id" th:value="${email.id}" hidden>
+                <button type="submit">Supprimer</button>
+            </form>
+        </li>
+        <br/>
     </ul>
+</div>
 </body>
 </html>
