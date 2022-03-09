@@ -1,13 +1,16 @@
-package app;
+package app.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Email {
+@Embeddable
+public class Email implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
     @ManyToOne
     @JoinColumn(name="contact_fk")
@@ -34,11 +37,11 @@ public class Email {
         return email;
     }
 
-    public void setClient(Contact contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
-    public Contact getClient() {
+    public Contact getContact() {
         return contact;
     }
 }

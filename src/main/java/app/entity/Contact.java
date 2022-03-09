@@ -1,20 +1,32 @@
-package app;
+package app.entity;
+
+
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class Contact {
+@Embeddable
+public class Contact implements Serializable {
+    private static final long serialVersionUID = -7415410969017941320L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
+    @NotNull
     private String prenom;
+
+    @NotNull
     private String nom;
+
+    @NotNull
     private String adresse_postale;
+
     @OneToMany(mappedBy = "contact")
     private Collection<Email> emails;
-
     protected Contact() {}
 
     public Contact(String prenom, String nom, String adresse_postale) {
@@ -36,6 +48,10 @@ public class Contact {
         return prenom;
     }
 
+    public Collection<Email> getEmails() {
+        return this.emails;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -52,7 +68,7 @@ public class Contact {
         this.prenom = prenom;
     }
 
-    public void setAdresse(String adresse) {
+    public void setAdressePostale(String adresse) {
         this.adresse_postale = adresse;
     }
 }
