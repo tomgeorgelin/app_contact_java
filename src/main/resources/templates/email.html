@@ -34,7 +34,7 @@
         }
         li {
             display: grid;
-            grid-template-columns: 3em 1fr 5em;
+            grid-template-columns: 1fr 5em;
         }
 
     </style>
@@ -48,7 +48,7 @@
 
         <select name="contact" id="contact" required>
             <option value="">-- selectionner un contact</option>
-            <option th:each="contact : ${contacts}" th:value="${contact.id}" th:text="${contact.nom + contact.prenom}">
+            <option th:each="contact : ${contacts}" th:value="${contact.id}" th:text="${contact.nom + ' ' + contact.prenom}">
             </option>
         </select>
         <button type="submit">Ajouter</button>
@@ -56,7 +56,7 @@
     <h2>Emails existantes</h2>
     <ul th:each="email : ${emails}">
         <li>
-            <span th:text="${email.id}"/><span th:text="${email.email}"/>
+            <span th:text="${email.email}"/>
             <form action="/remove-email" method="post">
                 <input type="number" name="id" th:value="${email.id}" hidden>
                 <button type="submit">Supprimer</button>
