@@ -15,8 +15,9 @@ public class Email {
 
     protected Email() {}
 
-    public Email(String email) {
+    public Email(String email, Contact contact) {
         this.email = email;
+        this.contact = contact;
     }
 
     @Override

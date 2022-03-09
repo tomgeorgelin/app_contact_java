@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajout & listing  email</title>
+    <title>Ajout & listing des email</title>
 </head>
 <body>
     <h1>Ajouter une adresse email</h1>
     <form action="/email" method="post">
         <label for="email">Adresse email</label>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" required>
+
+        <select name="contact" id="contact" required>
+            <option value="">-- selectionner un contact</option>
+            <option th:each="contact : ${contacts}" th:value="${contact.id}" th:text="${contact.nom + contact.prenom}">
+            </option>
+        </select>
         <button type="submit">Ajouter</button>
     </form>
     <h2>Emails existants</h2>
     <ul th:each="email : ${emails}">
-        <li th:text="${email}"/><br/>
+        <li th:text="${email}"/>
+        <form action="/remove-email" method="post">
+            <input type="number" name="id" th:value="${email.id}" hidden>
+            <button type="submit">Supprimer</button>
+        </form><br/>
     </ul>
 </body>
 </html>
