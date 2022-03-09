@@ -40,8 +40,21 @@ public class ContactController {
     }
 
     @PostMapping("/create")
-    public String createClient(Model model, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("adresse") String adresse) {
-        repository.save(new Contact(prenom,nom,adresse));
+    public String createClient(Model model, @RequestParam(value = "id",required = false) Long id, @RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("adresse") String adresse) {
+        if(id != null) {
+            Optional<Contact> c = repository.findById(id);
+            if(!c.isEmpty()) {
+                Contact contact = c.get();
+                contact.setNom(nom);
+                contact.setPrenom(prenom);
+                contact.setAdresse(adresse);
+                repository.save(contact);
+            }
+        }
+        else {
+            repository.save(new Contact(prenom,nom,adresse));
+        }
+
         return "redirect:contacts";
     }
 

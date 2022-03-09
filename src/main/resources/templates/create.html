@@ -8,6 +8,7 @@
 
 <div th:if="${contact}">
     <form action="/create" method="post">
+        <input type="number" th:value="${contact.id}" name="id" hidden>
         <input type="text" name="nom" id="nom" placeholder="nom" th:value="${contact.nom}" required>
         <input type="text" name="prenom" id="prenom" placeholder="prenom" th:value="${contact.prenom}" required>
         <input type="text" name="adresse" id="adresse" placeholder="adresse" th:value="${contact.adresse_postale}" required>

@@ -43,4 +43,16 @@ public class Contact {
     public String getAdresse_postale() {
         return adresse_postale;
     }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse_postale = adresse;
+    }
 }
