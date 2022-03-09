@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
         }
-        form {
+        body > div {
             background: white;
             width: 700px;
             max-width: 80vw;
@@ -51,11 +51,16 @@
             border-radius: 20px;
             margin: 10px;
         }
+        .back {
+            color: black;
+            text-decoration: black;
+        }
     </style>
 </head>
 <body>
 
 <div th:if="${contact}">
+    <a class="back" href="contacts">Retour</a>
     <form action="/create" method="post">
         <h2>Modification :</h2>
         <div>
@@ -77,6 +82,7 @@
     </form>
 </div>
 <div th:unless="${contact}">
+    <a class="back" href="contacts">Retour</a>
     <form action="/create" method="post">
         <h2>Création : </h2>
         <div>
