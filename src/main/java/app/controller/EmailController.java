@@ -15,10 +15,12 @@ import java.util.Optional;
 
 @Controller
 public class EmailController {
+
     @Autowired
     EmailRepository repository;
     @Autowired
     ContactRepository repositoryContact;
+
     @GetMapping("/email")
     public String newEmail(Model model) {
         model.addAttribute("emails", repository.findAll());
@@ -33,7 +35,6 @@ public class EmailController {
             Contact contact = c.get();
             repository.save(new Email(email,contact));
         }
-
         return "redirect:email";
     }
 

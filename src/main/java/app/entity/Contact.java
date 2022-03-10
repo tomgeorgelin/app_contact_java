@@ -4,13 +4,14 @@ package app.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-@Embeddable
-public class Contact implements Serializable {
-    private static final long serialVersionUID = -7415410969017941320L;
+@XmlRootElement
+@Table(name = "CONTACT")
+public class Contact {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,26 +19,22 @@ public class Contact implements Serializable {
 
     @NotNull
     private String prenom;
-
     @NotNull
     private String nom;
 
     @NotNull
-    private String adresse_postale;
+    private String adressePostale;
 
-    @OneToMany(mappedBy = "contact")
-    private Collection<Email> emails;
+    @ElementCollection
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Email> emails;
+
     protected Contact() {}
 
-    public Contact(String prenom, String nom, String adresse_postale) {
+    public Contact(String prenom, String nom, String adressePostale) {
         this.prenom = prenom;
         this.nom = nom;
-        this.adresse_postale = adresse_postale;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d %s %s %s %s", id, prenom, nom, adresse_postale, this.emails != null ? emails.toString() : "");
+        this.adressePostale = adressePostale;
     }
 
     public Long getId() {
@@ -52,12 +49,12 @@ public class Contact implements Serializable {
         return this.emails;
     }
 
-    public String getNom() {
-        return nom;
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
     }
 
-    public String getAdresse_postale() {
-        return adresse_postale;
+    public String getNom() {
+        return nom;
     }
 
     public void setNom(String nom) {
@@ -68,7 +65,21 @@ public class Contact implements Serializable {
         this.prenom = prenom;
     }
 
-    public void setAdressePostale(String adresse) {
-        this.adresse_postale = adresse;
+    public void setId(Long id) {
+        this.id = id;
     }
+
+    public void setAdressePostale(String adressePostale) {
+        this.adressePostale = adressePostale;
+    }
+
+    public String getAdressePostale() {
+        return adressePostale;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s %s %s %s", id, prenom, nom, adressePostale, this.emails != null ? emails.toString() : "");
+    }
+
 }

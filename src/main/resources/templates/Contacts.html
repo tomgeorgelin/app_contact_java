@@ -61,7 +61,7 @@
             <span th:text="${c.id}"/>
             <span th:text="${c.prenom}"/>
             <span th:text="${c.nom}"/>
-            <span th:text="${c.adresse_postale}"/>
+            <span th:text="${c.adressePostale}"/>
             <form action="/remove" method="post">
                 <input type="number" name="id" th:value="${c.id}" hidden>
                 <button type="submit">Supprimer</button>

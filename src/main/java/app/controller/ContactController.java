@@ -14,10 +14,13 @@ import java.util.Optional;
 
 @Controller
 public class ContactController {
+
     @Autowired
     ContactRepository repository;
+
     @Autowired
     EmailRepository repositoryEmail;
+
     @GetMapping("/contacts")
     public String getContacts(Model model) {
         model.addAttribute("contacts", repository.findAll());
